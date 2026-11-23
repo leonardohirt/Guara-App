@@ -52,24 +52,93 @@ export default function Config() {
             </View>
             <Text style={styles.appName}>Guará-App</Text>
             <View style={styles.versionBadge}>
-              <Text style={styles.versionBadgeText}>VERSÃO {version} • PRODUÇÃO</Text>
+              <Text style={styles.versionBadgeText}>VERSÃO {version} • PRODUÇÃO OFICIAL</Text>
             </View>
             <Text style={styles.appSubtitle}>
-              Plataforma de preservação e difusão do hino municipal, historiografia
-              oficial, tradições orais e patrimônio de Guarapuava — PR.
+              Plataforma de salvaguarda historiográfica, difusão cívica e educação
+              patrimonial de Guarapuava — PR.
             </Text>
           </View>
 
-          {/* DESENVOLVEDOR */}
+          {/* CRÉDITOS HISTÓRICOS & CURADORIA (DESTAQUE MÁXIMO DE CREDIBILIDADE) */}
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>AUTORIA E DESENVOLVIMENTO</Text>
+            <View style={styles.sectionBadgeRow}>
+              <View style={styles.institutionalBadge}>
+                <Text style={styles.institutionalBadgeText}>SALVAGUARDA & CURADORIA HISTÓRICA</Text>
+              </View>
+            </View>
+            
+            <View style={styles.institutionalCard}>
+              <View style={styles.creditItem}>
+                <View style={styles.creditIconBox}>
+                  <Feather name="feather" size={18} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.creditRole}>Letra do Hino Municipal</Text>
+                  <Text style={styles.creditName}>Gilda Boscardim Todeschini</Text>
+                  <Text style={styles.creditDetail}>
+                    Composição poética oficial exaltando os campos, os trigais e a força pioneira.
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.creditDivider} />
+
+              <View style={styles.creditItem}>
+                <View style={styles.creditIconBox}>
+                  <Feather name="music" size={18} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.creditRole}>Música e Regência Oficial</Text>
+                  <Text style={styles.creditName}>Maestro Luiz Eulógio Zilli</Text>
+                  <Text style={styles.creditDetail}>
+                    Arranjo sinfônico tradicional adotado em solenidades cívicas do município.
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.creditDivider} />
+
+              <View style={styles.creditItem}>
+                <View style={styles.creditIconBox}>
+                  <Feather name="archive" size={18} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.creditRole}>Acervo Iconográfico & Partitura</Text>
+                  <Text style={styles.creditName}>Museu Municipal Visconde de Guarapuava</Text>
+                  <Text style={styles.creditDetail}>
+                    Salvaguarda do manuscrito da partitura e registros fotográficos da fundação de 1819.
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.creditDivider} />
+
+              <View style={styles.creditItem}>
+                <View style={styles.creditIconBox}>
+                  <Feather name="book-open" size={18} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.creditRole}>Pesquisa Histórica & Biografias</Text>
+                  <Text style={styles.creditName}>ALAC (Academia de Letras, Artes e Ciências)</Text>
+                  <Text style={styles.creditDetail}>
+                    Resgate da trajetória do abolicionista Belmiro de Miranda e tradição oral.
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          {/* DESENVOLVEDOR & CÓDIGO DO PROJETO (REPOSITÓRIO EM PRIMEIRO PLANO) */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>ENGENHARIA & CÓDIGO-FONTE</Text>
             <View style={styles.card}>
               <View style={styles.devRow}>
                 <View style={styles.avatarBadge}>
                   <Feather name="code" size={18} color={colors.gold} />
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text style={styles.devLabel}>Proponente & Desenvolvedor:</Text>
+                  <Text style={styles.devLabel}>Desenvolvido por:</Text>
                   <Text style={styles.devName}>{devName}</Text>
                   <Text style={styles.devAcademic}>
                     Graduando em Sistemas para Internet • UTFPR Campus Guarapuava
@@ -78,104 +147,50 @@ export default function Config() {
               </View>
 
               <View style={styles.linksContainer}>
+                {/* REPOSITÓRIO COM DESTAQUE PRIMÁRIO */}
                 <TouchableOpacity
-                  style={styles.outlineButton}
-                  activeOpacity={0.8}
-                  onPress={() => abrirLink("https://github.com/leonardohirt")}
-                >
-                  <Feather name="github" size={16} color={colors.text} style={{ marginRight: 8 }} />
-                  <Text style={styles.buttonText}>Perfil no GitHub</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={styles.outlineButton}
-                  activeOpacity={0.8}
+                  style={styles.primaryProjectButton}
+                  activeOpacity={0.85}
                   onPress={() =>
                     abrirLink("https://github.com/leonardohirt/APP-Guarapuava")
                   }
                 >
-                  <Feather name="terminal" size={16} color={colors.text} style={{ marginRight: 8 }} />
-                  <Text style={styles.buttonText}>Repositório do Código</Text>
+                  <Feather name="github" size={18} color={colors.textDark} style={{ marginRight: 8 }} />
+                  <Text style={styles.primaryProjectButtonText}>Repositório Oficial do Guará-App</Text>
+                </TouchableOpacity>
+
+                {/* PERFIL COM DESTAQUE SECUNDÁRIO */}
+                <TouchableOpacity
+                  style={styles.secondaryProfileButton}
+                  activeOpacity={0.8}
+                  onPress={() => abrirLink("https://github.com/leonardohirt")}
+                >
+                  <Feather name="user" size={16} color={colors.text} style={{ marginRight: 8 }} />
+                  <Text style={styles.secondaryProfileButtonText}>Perfil do Desenvolvedor no GitHub</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
 
-          {/* CRÉDITOS HISTÓRICOS */}
+          {/* ESPECIFICAÇÕES TÉCNICAS */}
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>CRÉDITOS HISTÓRICOS E ACERVO</Text>
-            <View style={styles.card}>
-              <View style={styles.creditItem}>
-                <View style={styles.creditIconBox}>
-                  <Feather name="feather" size={16} color={colors.gold} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.creditLabel}>Letra do Hino Municipal</Text>
-                  <Text style={styles.creditValue}>Gilda Boscardim Todeschini</Text>
-                </View>
-              </View>
-
-              <View style={styles.creditDivider} />
-
-              <View style={styles.creditItem}>
-                <View style={styles.creditIconBox}>
-                  <Feather name="music" size={16} color={colors.gold} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.creditLabel}>Música do Hino Municipal</Text>
-                  <Text style={styles.creditValue}>Luiz Eulógio Zilli</Text>
-                </View>
-              </View>
-
-              <View style={styles.creditDivider} />
-
-              <View style={styles.creditItem}>
-                <View style={styles.creditIconBox}>
-                  <Feather name="archive" size={16} color={colors.gold} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.creditLabel}>Acervo e Partitura Histórica</Text>
-                  <Text style={styles.creditValue}>
-                    Museu Municipal Visconde de Guarapuava
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.creditDivider} />
-
-              <View style={styles.creditItem}>
-                <View style={styles.creditIconBox}>
-                  <Feather name="book" size={16} color={colors.gold} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.creditLabel}>Pesquisa & Biografias</Text>
-                  <Text style={styles.creditValue}>
-                    ALAC (Academia de Letras, Artes e Ciências de Guarapuava)
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-
-          {/* CARACTERÍSTICAS TÉCNICAS */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>ARQUITETURA DE ENGENHARIA</Text>
+            <Text style={styles.sectionTitle}>ARQUITETURA DE PRODUTO</Text>
             <View style={styles.card}>
               <View style={styles.featureRow}>
                 <Feather name="check" size={16} color={colors.gold} style={{ marginRight: 10 }} />
-                <Text style={styles.featureText}>100% Autônomo e Funcional Offline</Text>
+                <Text style={styles.featureText}>100% Autônomo e Operação Offline (Zero consumo de dados)</Text>
               </View>
               <View style={styles.featureRow}>
                 <Feather name="check" size={16} color={colors.gold} style={{ marginRight: 10 }} />
-                <Text style={styles.featureText}>Áudios neurais de estúdio integrados</Text>
+                <Text style={styles.featureText}>Áudios e narrações neurais de alta fidelidade integrados</Text>
               </View>
               <View style={styles.featureRow}>
                 <Feather name="check" size={16} color={colors.gold} style={{ marginRight: 10 }} />
-                <Text style={styles.featureText}>Respostas táteis nativas (Haptic Feedback)</Text>
+                <Text style={styles.featureText}>Respostas táteis com retorno háptico nativo</Text>
               </View>
               <View style={styles.featureRow}>
                 <Feather name="check" size={16} color={colors.gold} style={{ marginRight: 10 }} />
-                <Text style={styles.featureText}>Armazenamento e recordes locais seguros</Text>
+                <Text style={styles.featureText}>Armazenamento seguro de pontuações via AsyncStorage</Text>
               </View>
             </View>
           </View>
@@ -240,10 +255,12 @@ const styles = StyleSheet.create({
   },
   versionBadge: {
     backgroundColor: colors.goldLight,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
     borderRadius: colors.radiusSm,
-    marginTop: 4,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+    marginTop: 6,
     marginBottom: colors.spacing.sm,
   },
   versionBadgeText: {
@@ -270,6 +287,31 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
     marginBottom: colors.spacing.sm,
   },
+  sectionBadgeRow: {
+    marginBottom: 8,
+  },
+  institutionalBadge: {
+    alignSelf: "flex-start",
+    backgroundColor: colors.goldLight,
+    paddingHorizontal: colors.spacing.sm,
+    paddingVertical: colors.spacing.xs,
+    borderRadius: colors.radiusSm,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+  },
+  institutionalBadgeText: {
+    color: colors.goldBright,
+    fontSize: 10.5,
+    fontWeight: "800",
+    letterSpacing: 1.2,
+  },
+  institutionalCard: {
+    backgroundColor: colors.card,
+    borderRadius: colors.radius,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+    padding: colors.spacing.md,
+  },
   card: {
     backgroundColor: colors.card,
     borderRadius: colors.radius,
@@ -277,6 +319,8 @@ const styles = StyleSheet.create({
     borderColor: colors.cardBorderSubtle,
     padding: colors.spacing.md,
   },
+
+  /* DESENVOLVEDOR */
   devRow: {
     flexDirection: "row",
     alignItems: "flex-start",
@@ -310,7 +354,22 @@ const styles = StyleSheet.create({
   linksContainer: {
     gap: colors.spacing.sm,
   },
-  outlineButton: {
+  primaryProjectButton: {
+    backgroundColor: colors.gold,
+    minHeight: 48,
+    borderRadius: colors.radius,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: colors.spacing.md,
+  },
+  primaryProjectButtonText: {
+    color: colors.textDark,
+    fontSize: 14,
+    fontWeight: "800",
+    letterSpacing: 0.5,
+  },
+  secondaryProfileButton: {
     backgroundColor: "transparent",
     borderWidth: 1,
     borderColor: colors.cardBorderSubtle,
@@ -321,39 +380,53 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: colors.spacing.md,
   },
-  buttonText: {
+  secondaryProfileButtonText: {
     color: colors.text,
     fontSize: 13.5,
     fontWeight: "600",
   },
 
-  /* CRÉDITOS */
+  /* CRÉDITOS INSTITUCIONAIS */
   creditItem: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     gap: colors.spacing.md,
+    paddingVertical: 4,
   },
   creditIconBox: {
-    width: 32,
-    height: 32,
+    width: 36,
+    height: 36,
     borderRadius: colors.radiusSm,
     backgroundColor: colors.goldLight,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 2,
   },
-  creditLabel: {
-    fontSize: 12,
-    color: colors.textSubtle,
+  creditRole: {
+    fontSize: 11.5,
+    fontWeight: "700",
+    color: colors.gold,
+    letterSpacing: 0.8,
+    textTransform: "uppercase",
+    marginBottom: 1,
   },
-  creditValue: {
-    fontSize: 14.5,
-    fontWeight: "600",
+  creditName: {
+    fontSize: 15.5,
+    fontWeight: "700",
     color: colors.text,
+    marginBottom: 2,
+  },
+  creditDetail: {
+    fontSize: 13.5,
+    color: colors.textMuted,
+    lineHeight: 19,
   },
   creditDivider: {
     height: 1,
     backgroundColor: colors.cardBorderSubtle,
-    marginVertical: colors.spacing.sm,
+    marginVertical: colors.spacing.md,
   },
 
   /* ESPECIFICAÇÕES */

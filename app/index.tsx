@@ -1,8 +1,9 @@
 import * as Haptics from "expo-haptics";
-import { Stack, useRouter } from "expo-router";
 import { Feather, Ionicons } from "@expo/vector-icons";
+import { Stack, useRouter } from "expo-router";
 import React from "react";
 import {
+  Image,
   Platform,
   ScrollView,
   StyleSheet,
@@ -24,14 +25,21 @@ export default function Home() {
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Guará-App",
           headerShown: true,
           headerStyle: { backgroundColor: colors.background },
           headerTintColor: colors.text,
-          headerTitleStyle: {
-            fontSize: 18,
-            fontWeight: "700",
-          },
+          headerTitle: () => (
+            <View style={styles.headerTitleContainer}>
+              <Image
+                source={require("../assets/images/icon.png")}
+                style={styles.headerLogo}
+              />
+              <View>
+                <Text style={styles.headerTitleText}>Guará-App</Text>
+                <Text style={styles.headerSubtitleText}>Patrimônio Histórico</Text>
+              </View>
+            </View>
+          ),
           headerRight: () => (
             <TouchableOpacity
               onPress={() => handleNavigate("/config")}
@@ -51,61 +59,75 @@ export default function Home() {
       >
         <View style={styles.responsiveWrapper}>
           
-          {/* HERO SECTION — AÇÃO PRIMÁRIA DOMINANTE */}
+          {/* HERO SECTION */}
           <View style={styles.heroCard}>
             <View style={styles.badge}>
               <View style={styles.badgeDot} />
-              <Text style={styles.badgeText}>PATRIMÔNIO & MEMÓRIA</Text>
+              <Text style={styles.badgeText}>GUARAPUAVA • TERRA DO LOBO BRAVO</Text>
             </View>
 
             <Text style={styles.heroTitle}>Guará-App</Text>
             <Text style={styles.heroSubtitle}>
-              Guarapuava • Terra do Lobo Bravo
+              Memória, Cidadania e Tradição
             </Text>
 
             <Text style={styles.heroDescription}>
-              Plataforma digital de difusão do hino municipal, iconografia
-              histórica, biografias e patrimônio cultural do Terceiro Planalto.
+              Plataforma digital para preservação historiográfica, educação cívica
+              e salvaguarda do patrimônio material e imaterial de Guarapuava.
             </Text>
 
-            {/* BOTÃO PRINCIPAL COM HIERARQUIA CLARA */}
-            <TouchableOpacity
-              style={styles.primaryActionButton}
-              activeOpacity={0.85}
-              onPress={() => handleNavigate("/hino")}
-            >
-              <Ionicons name="play" size={18} color={colors.textDark} style={{ marginRight: 8 }} />
-              <Text style={styles.primaryActionText}>OUVIR O HINO MUNICIPAL</Text>
-            </TouchableOpacity>
-
-            <View style={styles.heroSecondaryActions}>
+            {/* AÇÕES PRINCIPAIS EQUILIBRADAS (CIVIS E EDUCACIONAIS) */}
+            <View style={styles.heroActionCluster}>
+              {/* 1. OUVIR O HINO */}
               <TouchableOpacity
-                style={styles.heroOutlineButton}
-                activeOpacity={0.8}
-                onPress={() => handleNavigate("/historia")}
+                style={styles.primaryActionButton}
+                activeOpacity={0.85}
+                onPress={() => handleNavigate("/hino")}
               >
-                <Feather name="book-open" size={16} color={colors.goldBright} style={{ marginRight: 6 }} />
-                <Text style={styles.heroOutlineText}>Linha do Tempo</Text>
+                <Ionicons name="play" size={18} color={colors.textDark} style={{ marginRight: 8 }} />
+                <Text style={styles.primaryActionText}>OUVIR O HINO MUNICIPAL</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.heroOutlineButton}
-                activeOpacity={0.8}
-                onPress={() => handleNavigate("/quiz")}
-              >
-                <Feather name="award" size={16} color={colors.goldBright} style={{ marginRight: 6 }} />
-                <Text style={styles.heroOutlineText}>Desafio Quiz</Text>
-              </TouchableOpacity>
+              {/* 2. DUPLA EDUCACIONAL: HISTÓRIA & QUIZ */}
+              <View style={styles.heroSecondaryRow}>
+                <TouchableOpacity
+                  style={styles.educationButton}
+                  activeOpacity={0.85}
+                  onPress={() => handleNavigate("/historia")}
+                >
+                  <View style={styles.btnIconCircle}>
+                    <Feather name="book-open" size={16} color={colors.gold} />
+                  </View>
+                  <View style={styles.btnTextCol}>
+                    <Text style={styles.educationButtonTitle}>História Oficial</Text>
+                    <Text style={styles.educationButtonSub}>Linha do Tempo 1770–1871</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.educationButton}
+                  activeOpacity={0.85}
+                  onPress={() => handleNavigate("/quiz")}
+                >
+                  <View style={styles.btnIconCircle}>
+                    <Feather name="award" size={16} color={colors.gold} />
+                  </View>
+                  <View style={styles.btnTextCol}>
+                    <Text style={styles.educationButtonTitle}>Desafio Escolar</Text>
+                    <Text style={styles.educationButtonSub}>Quiz de Conhecimento</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
 
-          {/* SEÇÃO EXPLORAR — LAYOUT DIVERSIFICADO (SEM CARTÕES REPETIDOS) */}
+          {/* SEÇÃO ACERVO HISTÓRICO */}
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>ACERVO HISTÓRICO</Text>
+            <Text style={styles.sectionTitle}>ACERVO E CULTURA</Text>
             <View style={styles.sectionDivider} />
           </View>
 
-          {/* DESTAQUE 1: ONTEM E HOJE (BLOCO LARGO COM RELEVO) */}
+          {/* CARD DESTAQUE: ONTEM E HOJE */}
           <TouchableOpacity
             style={styles.featuredCard}
             activeOpacity={0.85}
@@ -120,15 +142,15 @@ export default function Home() {
               </View>
               <Text style={styles.featuredTitle}>Ontem e Hoje: Evolução Urbana</Text>
               <Text style={styles.featuredDesc}>
-                Comparativo documental dos 5 marcos arquitetônicos fundamentais de Guarapuava em alta definição.
+                Comparativo visual dos 5 marcos arquitetônicos fundamentais com registros históricos catalogados.
               </Text>
             </View>
             <Feather name="arrow-right" size={20} color={colors.gold} />
           </TouchableOpacity>
 
-          {/* GRADE ASSIMÉTRICA EM DUPLA */}
+          {/* GRADE ASSIMÉTRICA */}
           <View style={styles.dualGrid}>
-            {/* LENDAS & CONTOS */}
+            {/* MITOS E TRADIÇÕES */}
             <TouchableOpacity
               style={styles.gridCard}
               activeOpacity={0.85}
@@ -142,11 +164,11 @@ export default function Home() {
               </View>
               <Text style={styles.gridCardTitle}>Mitos e Tradições</Text>
               <Text style={styles.gridCardDesc}>
-                Belmiro de Miranda, Lagoa das Lágrimas e lendas narradas em estúdio.
+                Belmiro de Miranda, Lagoa das Lágrimas e narrativas orais em áudio de estúdio.
               </Text>
             </TouchableOpacity>
 
-            {/* CURIOSIDADES */}
+            {/* FATOS E CONQUISTAS (ALINHADO COM A TELA CURIOSIDADES) */}
             <TouchableOpacity
               style={styles.gridCard}
               activeOpacity={0.85}
@@ -156,19 +178,19 @@ export default function Home() {
                 <View style={styles.smallIconBox}>
                   <Feather name="compass" size={18} color={colors.gold} />
                 </View>
-                <Text style={styles.gridBadge}>12 FATOS</Text>
+                <Text style={styles.gridBadge}>VOCÊ SABIA?</Text>
               </View>
-              <Text style={styles.gridCardTitle}>Você Sabia?</Text>
+              <Text style={styles.gridCardTitle}>Fatos e Conquistas</Text>
               <Text style={styles.gridCardDesc}>
-                Origens da cidade, altitude, símbolos botânicos e fatos singulares.
+                Curiosidades sobre a história, símbolos, altitude e a natureza de Guarapuava.
               </Text>
             </TouchableOpacity>
           </View>
 
-          {/* RODAPÉ INSTITUCIONAL */}
+          {/* RODAPÉ */}
           <View style={styles.footerContainer}>
             <Text style={styles.footerText}>
-              Instituto Histórico de Guarapuava • Preservação Digital
+              Instituto Histórico de Guarapuava • Preservação e Cidadania Digital
             </Text>
           </View>
 
@@ -193,9 +215,34 @@ const styles = StyleSheet.create({
     maxWidth: colors.layout.maxWidth,
     alignSelf: "center",
   },
+
+  /* HEADER SUPERIOR ACABADO */
+  headerTitleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  headerLogo: {
+    width: 28,
+    height: 28,
+    borderRadius: colors.radiusSm,
+  },
+  headerTitleText: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: colors.text,
+    letterSpacing: -0.2,
+    lineHeight: 18,
+  },
+  headerSubtitleText: {
+    fontSize: 10.5,
+    fontWeight: "600",
+    color: colors.gold,
+    letterSpacing: 0.5,
+  },
   settingsButton: {
-    width: 40,
-    height: 40,
+    width: 38,
+    height: 38,
     borderRadius: colors.radius,
     backgroundColor: colors.card,
     borderWidth: 1,
@@ -272,7 +319,10 @@ const styles = StyleSheet.create({
     marginBottom: colors.spacing.md,
   },
 
-  /* BOTÕES DO HERO */
+  /* CLUSTER DE AÇÕES EQUILIBRADO */
+  heroActionCluster: {
+    gap: colors.spacing.sm,
+  },
   primaryActionButton: {
     backgroundColor: colors.gold,
     minHeight: 48,
@@ -281,7 +331,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: colors.spacing.md,
-    marginBottom: colors.spacing.sm,
   },
   primaryActionText: {
     color: colors.textDark,
@@ -289,29 +338,44 @@ const styles = StyleSheet.create({
     fontSize: 14,
     letterSpacing: 0.8,
   },
-  heroSecondaryActions: {
+  heroSecondaryRow: {
     flexDirection: "row",
     gap: colors.spacing.sm,
   },
-  heroOutlineButton: {
+  educationButton: {
     flex: 1,
-    minHeight: 44,
+    minHeight: 52,
     borderRadius: colors.radius,
     borderWidth: 1,
     borderColor: colors.cardBorder,
     backgroundColor: "rgba(197, 160, 89, 0.05)",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: colors.spacing.sm,
+    paddingHorizontal: colors.spacing.sm + 2,
+    gap: 8,
   },
-  heroOutlineText: {
-    color: colors.goldBright,
-    fontWeight: "600",
-    fontSize: 14,
+  btnIconCircle: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: colors.goldLight,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btnTextCol: {
+    flex: 1,
+  },
+  educationButtonTitle: {
+    color: colors.text,
+    fontWeight: "700",
+    fontSize: 13.5,
+  },
+  educationButtonSub: {
+    color: colors.textSubtle,
+    fontSize: 11,
   },
 
-  /* SEÇÃO EXPLORAR */
+  /* SEÇÃO ACERVO */
   sectionHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -331,7 +395,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cardBorderSubtle,
   },
 
-  /* BLOCO LARGO DESTACADO */
+  /* BLOCO LARGO */
   featuredCard: {
     backgroundColor: colors.card,
     borderRadius: colors.radius,
@@ -377,7 +441,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 
-  /* GRADE DUPLA ASSIMÉTRICA */
+  /* GRADE DUPLA */
   dualGrid: {
     flexDirection: "row",
     gap: colors.spacing.md,

@@ -3,87 +3,107 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { colors } from "@/constants/colors";
 
-const listaCuriosidades = [
+interface CuriosidadeItem {
+  id: number;
+  numero: string;
+  emoji: string;
+  pergunta: string;
+  resposta: string;
+}
+
+const listaCuriosidades: CuriosidadeItem[] = [
   {
     id: 1,
-    numero: "01",
-    pergunta: "Origem do nome Guarapuava",
+    numero: "#01",
+    emoji: "🐺",
+    pergunta: "Origem do Nome 'Guarapuava'",
     resposta:
-      "Vem do tronco linguístico tupi-guarani: 'Guará' (lobo-guará) e 'Puava' (bravo ou rumor sonoro), significando literalmente 'Lobo Bravo'.",
+      "Vem do tronco linguístico tupi-guarani: 'Guará' (lobo-guará) e 'Puava' (bravo ou rumor sonoro que ecoa), batizando a terra do 'Lobo Bravo'.",
   },
   {
     id: 2,
-    numero: "02",
-    pergunta: "Autoria do Hino Municipal",
+    numero: "#02",
+    emoji: "🎼",
+    pergunta: "Quem escreveu o hino municipal?",
     resposta:
-      "A letra foi composta pela poetisa Gilda Boscardim Todeschini e a melodia pelo maestro Luiz Eulógio Zilli, formalizado como símbolo cívico municipal.",
+      "A letra foi composta pela poetisa Gilda Boscardim Todeschini e a melodia pelo maestro Luiz Eulógio Zilli, formalizado como símbolo cívico oficial.",
   },
   {
     id: 3,
-    numero: "03",
-    pergunta: "O Pinheiro Magistral",
+    numero: "#03",
+    emoji: "🌲",
+    pergunta: "O 'Pinheiro Magistral'",
     resposta:
-      "A Araucaria angustifolia é o símbolo vegetal maior de Guarapuava, celebrada no hino como imagem de altivez, longevidade e vigor cívico.",
+      "A Araucaria angustifolia é o símbolo vegetal maior da nossa terra, exaltada no hino como testemunha de longevidade, altivez e força cívica.",
   },
   {
     id: 4,
-    numero: "04",
+    numero: "#04",
+    emoji: "🏔️",
     pergunta: "Capital do Terceiro Planalto",
     resposta:
-      "Situada a 1.100 metros de altitude média, Guarapuava destaca-se entre as cidades mais altas e de clima temperado mais ameno do estado do Paraná.",
+      "Situada a 1.100 metros de altitude média, Guarapuava destaca-se entre as cidades de clima temperado mais ameno e maior altitude do Paraná.",
   },
   {
     id: 5,
-    numero: "05",
+    numero: "#05",
+    emoji: "📜",
     pergunta: "Salvaguarda da Partitura Histórica",
     resposta:
       "O manuscrito original da partitura do hino municipal está sob a guarda e preservação permanente do Museu Histórico Visconde de Guarapuava.",
   },
   {
     id: 6,
-    numero: "06",
+    numero: "#06",
+    emoji: "🌾",
     pergunta: "Polo Global da Cevada e Malte",
     resposta:
       "O município abriga a maior maltaria da América Latina (Cooperativa Agrária), sendo referência internacional no cultivo e beneficiamento de malte cervejeiro.",
   },
   {
     id: 7,
-    numero: "07",
+    numero: "#07",
+    emoji: "🌊",
     pergunta: "O Majestoso Salto São Francisco",
     resposta:
       "Com 196 metros de queda livre contínua, constitui o maior salto hidrográfico da Região Sul do Brasil, localizado nos limites territoriais de Guarapuava.",
   },
   {
     id: 8,
-    numero: "08",
+    numero: "#08",
+    emoji: "💧",
     pergunta: "O Antigo Rocio da Lagoa das Lágrimas",
     resposta:
-      "Antes de se tornar o principal parque de convivência central, o espaço era denominado 'Rocio', servindo de parada hídrica e descanso para tropeiros.",
+      "Antes de se transformar no principal parque de convivência central, o espaço era denominado 'Rocio', servindo de parada hídrica para os tropeiros.",
   },
   {
     id: 9,
-    numero: "09",
+    numero: "#09",
+    emoji: "🐎",
     pergunta: "Rota Estratégica do Tropeirismo",
     resposta:
       "Pela posição geográfica entre os campos de Palmas e o litoral, Guarapuava foi entreposto obrigatório de caravanas comerciais e tropas de mulas no século XIX.",
   },
   {
     id: 10,
-    numero: "10",
+    numero: "#10",
+    emoji: "✨",
     pergunta: "A Alcunha de 'Menina Radiante'",
     resposta:
       "Verso consagrado do hino municipal que personifica a cidade, associando a luminosidade do sol aos trigais dourados que enfeitavam as colinas.",
   },
   {
     id: 11,
-    numero: "11",
+    numero: "#11",
+    emoji: "🏛️",
     pergunta: "Belmiro de Miranda e o Abolicionismo",
     resposta:
-      "Mestre de obras histórico nascido cativo em 1825, Belmiro comprou a própria alforria trabalhando em horas noturnas e articulou a libertação de mais de 50 escravizados.",
+      "Mestre de obras histórico nascido cativo em 1825, Belmiro comprou a própria alforria trabalhando em horas noturnas e libertou mais de 50 escravizados.",
   },
   {
     id: 12,
-    numero: "12",
+    numero: "#12",
+    emoji: "🛡️",
     pergunta: "O Fortim Atalaia de 1810",
     resposta:
       "Construído pela Real Expedição de Conquista liderada por Diogo Pinto de Azevedo Portugal, constituiu o primeiro ponto fortificado de povoamento colonial.",
@@ -95,7 +115,7 @@ export default function Curiosidades() {
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Você Sabia?",
+          title: "Curiosidades",
           headerStyle: { backgroundColor: colors.background },
           headerTintColor: colors.text,
           headerTitleStyle: {
@@ -105,35 +125,46 @@ export default function Curiosidades() {
         }}
       />
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.responsiveWrapper}>
           
+          {/* HEADER INTEGRADO E LIMPO */}
           <View style={styles.headerBlock}>
-            <Text style={styles.headerTag}>DOCUMENTAÇÃO HISTÓRICA</Text>
-            <Text style={styles.headerTitle}>12 Fatos Sobre Guarapuava</Text>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>VOCÊ SABIA?</Text>
+            </View>
+            <Text style={styles.headerTitle}>Fatos e Conquistas</Text>
             <Text style={styles.headerDesc}>
-              Aspectos geográficos, cívicos e culturais que fundamentam a identidade do Terceiro Planalto.
+              Aspectos históricos, geográficos e culturais que fundamentam a
+              identidade e o pioneirismo de Guarapuava.
             </Text>
           </View>
 
-          {/* LISTA EDITORIAL (SEM CORES DISPERSAS, COM HIERARQUIA COESA) */}
-          <View style={styles.listContainer}>
-            {listaCuriosidades.map((item, index) => (
-              <View key={item.id} style={styles.itemRow}>
-                <View style={styles.numberCol}>
-                  <Text style={styles.numberText}>{item.numero}</Text>
+          {/* LISTA DE CARTÕES PADRONIZADOS */}
+          <View style={styles.cardsList}>
+            {listaCuriosidades.map((item) => (
+              <View key={item.id} style={styles.curiosidadeCard}>
+                <View style={styles.cardHeaderRow}>
+                  <View style={styles.iconCircle}>
+                    <Text style={styles.iconEmoji}>{item.emoji}</Text>
+                  </View>
+                  <View style={styles.numberBadge}>
+                    <Text style={styles.numberText}>{item.numero}</Text>
+                  </View>
                 </View>
-                <View style={styles.contentCol}>
-                  <Text style={styles.itemTitle}>{item.pergunta}</Text>
-                  <Text style={styles.itemDesc}>{item.resposta}</Text>
-                </View>
+
+                <Text style={styles.questionTitle}>{item.pergunta}</Text>
+                <Text style={styles.answerText}>{item.resposta}</Text>
               </View>
             ))}
           </View>
 
           <View style={styles.footerNote}>
             <Text style={styles.footerText}>
-              Fonte: Acervo Histórico Municipal • ALAC • Museu Visconde de Guarapuava
+              Acervo Histórico Municipal • ALAC • Museu Visconde de Guarapuava
             </Text>
           </View>
 
@@ -158,15 +189,24 @@ const styles = StyleSheet.create({
     maxWidth: colors.layout.maxWidth,
     alignSelf: "center",
   },
+
+  /* HEADER */
   headerBlock: {
     marginBottom: colors.spacing.lg,
   },
-  headerTag: {
+  badge: {
+    alignSelf: "flex-start",
+    backgroundColor: colors.goldLight,
+    paddingHorizontal: colors.spacing.sm,
+    paddingVertical: colors.spacing.xs,
+    borderRadius: colors.radiusSm,
+    marginBottom: 6,
+  },
+  badgeText: {
     fontSize: 11,
     fontWeight: "700",
-    color: colors.gold,
-    letterSpacing: 1.5,
-    marginBottom: 4,
+    color: colors.goldBright,
+    letterSpacing: 1.2,
   },
   headerTitle: {
     fontSize: 26,
@@ -181,42 +221,57 @@ const styles = StyleSheet.create({
     lineHeight: 23,
   },
 
-  /* LISTA */
-  listContainer: {
+  /* CARTÕES UNIFORMES (SEM FUNDOS VERDES OU ALEATÓRIOS) */
+  cardsList: {
+    gap: colors.spacing.md,
+  },
+  curiosidadeCard: {
     backgroundColor: colors.card,
     borderRadius: colors.radius,
     borderWidth: 1,
     borderColor: colors.cardBorderSubtle,
     padding: colors.spacing.md,
   },
-  itemRow: {
+  cardHeaderRow: {
     flexDirection: "row",
-    paddingVertical: colors.spacing.md,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.cardBorderSubtle,
-    gap: colors.spacing.md,
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: colors.spacing.sm,
   },
-  numberCol: {
-    width: 32,
-    alignItems: "flex-start",
-    paddingTop: 2,
+  iconCircle: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: colors.goldLight,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  iconEmoji: {
+    fontSize: 22,
+    textAlign: "center",
+  },
+  numberBadge: {
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: colors.radiusSm,
   },
   numberText: {
-    fontSize: 16,
-    fontWeight: "800",
-    color: colors.gold,
+    fontSize: 12,
+    fontWeight: "700",
+    color: colors.goldBright,
     fontVariant: ["tabular-nums"],
   },
-  contentCol: {
-    flex: 1,
-  },
-  itemTitle: {
-    fontSize: 16,
+  questionTitle: {
+    fontSize: 17,
     fontWeight: "700",
     color: colors.text,
-    marginBottom: 4,
+    marginBottom: 6,
+    lineHeight: 22,
   },
-  itemDesc: {
+  answerText: {
     fontSize: 14.5,
     color: colors.textMuted,
     lineHeight: 22,
