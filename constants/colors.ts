@@ -1,38 +1,48 @@
 export const colors = {
-  // Backgrounds
-  background: "#070D18",
-  backgroundDark: "#040810",
-  backgroundElevated: "#0C1527",
+  // 1. Fundo limpo e austero (Ardósia Profunda)
+  background: "#0B0F17",
+  backgroundDark: "#070A0F",
+  backgroundElevated: "#131923",
   
-  // Gold / Amber Palette (Editorial & Premium)
-  gold: "#F59E0B",
-  goldBright: "#FBBF24",
-  goldChampagne: "#FEF3C7",
-  goldLight: "rgba(245, 158, 11, 0.12)",
-  goldGlow: "rgba(245, 158, 11, 0.28)",
+  // 2. Única cor de destaque com identidade: Ouro Histórico dos trigais
+  gold: "#C5A059",
+  goldBright: "#DFCA9B",
+  goldChampagne: "#F7EEDD",
+  goldLight: "rgba(197, 160, 89, 0.12)",
+  goldGlow: "rgba(197, 160, 89, 0.25)",
   
-  // Surfaces & Glassmorphism
-  card: "rgba(15, 23, 42, 0.75)",
-  cardGlass: "rgba(19, 31, 55, 0.7)",
-  cardGlassHover: "rgba(28, 44, 76, 0.85)",
-  cardBorder: "rgba(245, 158, 11, 0.2)",
+  // 3. Superfícies sólidas e discretas (sem brilhos ou gradientes pesados)
+  card: "#131923",
+  cardGlass: "#131923",
+  cardGlassHover: "#1A2230",
+  cardBorder: "rgba(197, 160, 89, 0.3)",
   cardBorderSubtle: "rgba(255, 255, 255, 0.08)",
   
-  // Typography
+  // 4. Tipografia de alto contraste para leitura sem esforço (WCAG AAA)
   text: "#F8FAFC",
   textMuted: "#CBD5E1",
-  textSubtle: "#64748B",
-  textDark: "#070D18",
+  textSubtle: "#94A3B8",
+  textDark: "#0B0F17",
   
-  // Accents
-  emerald: "#10B981",
-  emeraldLight: "rgba(16, 185, 129, 0.15)",
-  ruby: "#EF4444",
-  rubyLight: "rgba(239, 68, 68, 0.15)",
-  blueAccent: "#38BDF8",
-  
-  // States
+  // 5. Estados funcionais
   correct: "#10B981",
   incorrect: "#EF4444",
   shareGreen: "#25D366",
+
+  // 6. Tokens de consistência (Anti-slop)
+  radius: 8, // Raio único para botões, campos e cartões
+  radiusSm: 4,
+  radiusLg: 12,
+  
+  spacing: {
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32,
+  },
+
+  layout: {
+    maxWidth: 640,
+  }
 };

@@ -1,12 +1,19 @@
 import * as Haptics from "expo-haptics";
-import { Stack, useRouter } from 'expo-router';
-import { MotiView } from 'moti';
-import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '@/constants/colors';
+import { Stack, useRouter } from "expo-router";
+import { Feather, Ionicons } from "@expo/vector-icons";
+import React from "react";
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { colors } from "@/constants/colors";
 
 export default function Home() {
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleNavigate = (path: any) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -15,163 +22,156 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen 
-        options={{ 
+      <Stack.Screen
+        options={{
           title: "Guará-App",
-          headerShown: true, 
+          headerShown: true,
           headerStyle: { backgroundColor: colors.background },
           headerTintColor: colors.text,
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: "700",
+          },
           headerRight: () => (
-            <TouchableOpacity 
-              onPress={() => handleNavigate("/config")} 
+            <TouchableOpacity
+              onPress={() => handleNavigate("/config")}
               style={styles.settingsButton}
               activeOpacity={0.7}
+              accessibilityLabel="Sobre o aplicativo"
             >
-              <Text style={{ fontSize: 18 }}>⚙️</Text>
+              <Feather name="info" size={19} color={colors.gold} />
             </TouchableOpacity>
           ),
-        }} 
+        }}
       />
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        
-        {/* HERO SECTION */}
-        <MotiView 
-          from={{ opacity: 0, translateY: -16 }}
-          animate={{ opacity: 1, translateY: 0 }}
-          transition={{ duration: 600, type: 'timing' }}
-          style={styles.heroCard}
-        >
-          <View style={styles.badge}>
-            <View style={styles.badgeDot} />
-            <Text style={styles.badgeText}>GUARAPUAVA • TERRA DO LOBO BRAVO</Text>
-          </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
+        <View style={styles.responsiveWrapper}>
           
-          <Text style={styles.heroTitle}>Guará-App</Text>
-          <Text style={styles.heroSubtitleTag}>Hino, Memória & Tradição</Text>
-          
-          <Text style={styles.heroDescription}>
-            Explore as origens, os monumentos, as lendas urbanas e teste seus conhecimentos sobre a nossa terra.
-          </Text>
+          {/* HERO SECTION — AÇÃO PRIMÁRIA DOMINANTE */}
+          <View style={styles.heroCard}>
+            <View style={styles.badge}>
+              <View style={styles.badgeDot} />
+              <Text style={styles.badgeText}>PATRIMÔNIO & MEMÓRIA</Text>
+            </View>
 
-          {/* BOTÕES DE AÇÃO RÁPIDA */}
-          <View style={styles.actionGroup}>
-            <TouchableOpacity 
-              style={styles.primaryActionButton} 
+            <Text style={styles.heroTitle}>Guará-App</Text>
+            <Text style={styles.heroSubtitle}>
+              Guarapuava • Terra do Lobo Bravo
+            </Text>
+
+            <Text style={styles.heroDescription}>
+              Plataforma digital de difusão do hino municipal, iconografia
+              histórica, biografias e patrimônio cultural do Terceiro Planalto.
+            </Text>
+
+            {/* BOTÃO PRINCIPAL COM HIERARQUIA CLARA */}
+            <TouchableOpacity
+              style={styles.primaryActionButton}
               activeOpacity={0.85}
               onPress={() => handleNavigate("/hino")}
             >
-              <Text style={styles.primaryActionText}>▶  OUVIR O HINO</Text>
+              <Ionicons name="play" size={18} color={colors.textDark} style={{ marginRight: 8 }} />
+              <Text style={styles.primaryActionText}>OUVIR O HINO MUNICIPAL</Text>
             </TouchableOpacity>
 
-            <View style={styles.secondaryActionRow}>
-              <TouchableOpacity 
-                style={styles.secondaryActionButton} 
-                activeOpacity={0.85}
-                onPress={() => handleNavigate("/quiz")}
-              >
-                <Text style={styles.secondaryActionText}>🏆 JOGAR QUIZ</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity 
-                style={styles.tertiaryActionButton} 
-                activeOpacity={0.85}
+            <View style={styles.heroSecondaryActions}>
+              <TouchableOpacity
+                style={styles.heroOutlineButton}
+                activeOpacity={0.8}
                 onPress={() => handleNavigate("/historia")}
               >
-                <Text style={styles.tertiaryActionText}>📜 HISTÓRIA</Text>
+                <Feather name="book-open" size={16} color={colors.goldBright} style={{ marginRight: 6 }} />
+                <Text style={styles.heroOutlineText}>Linha do Tempo</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.heroOutlineButton}
+                activeOpacity={0.8}
+                onPress={() => handleNavigate("/quiz")}
+              >
+                <Feather name="award" size={16} color={colors.goldBright} style={{ marginRight: 6 }} />
+                <Text style={styles.heroOutlineText}>Desafio Quiz</Text>
               </TouchableOpacity>
             </View>
           </View>
-        </MotiView>
 
-        {/* SEÇÃO EXPLORAR */}
-        <MotiView 
-          from={{ opacity: 0, translateY: 24 }}
-          animate={{ opacity: 1, translateY: 0 }}
-          transition={{ delay: 150, duration: 600, type: 'timing' }}
-          style={styles.exploreSection}
-        >
-          <View style={styles.sectionHeaderRow}>
-            <Text style={styles.sectionTitle}>EXPLORAR CONTEÚDO</Text>
-            <View style={styles.sectionLine} />
+          {/* SEÇÃO EXPLORAR — LAYOUT DIVERSIFICADO (SEM CARTÕES REPETIDOS) */}
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>ACERVO HISTÓRICO</Text>
+            <View style={styles.sectionDivider} />
           </View>
 
-          {/* 1. CARD LETRA DO HINO */}
-          <TouchableOpacity 
-            style={styles.navCard} 
-            activeOpacity={0.8}
-            onPress={() => handleNavigate("/hino")}
-          >
-            <View style={styles.navIconContainer}>
-              <Text style={styles.navIcon}>🎵</Text>
-            </View>
-            <View style={styles.navCardBody}>
-              <Text style={styles.navCardTitle}>Letra do Hino</Text>
-              <Text style={styles.navCardDesc}>Versos de Gilda Todeschini e melodia de Luiz Zilli.</Text>
-            </View>
-            <View style={styles.navArrowCircle}>
-              <Text style={styles.navArrow}>→</Text>
-            </View>
-          </TouchableOpacity>
-
-          {/* 2. CARD FOTOS HISTÓRICAS */}
-          <TouchableOpacity 
-            style={styles.navCard} 
-            activeOpacity={0.8}
+          {/* DESTAQUE 1: ONTEM E HOJE (BLOCO LARGO COM RELEVO) */}
+          <TouchableOpacity
+            style={styles.featuredCard}
+            activeOpacity={0.85}
             onPress={() => handleNavigate("/fotos")}
           >
-            <View style={styles.navIconContainer}>
-              <Text style={styles.navIcon}>📸</Text>
+            <View style={styles.featuredIconBox}>
+              <Feather name="image" size={22} color={colors.gold} />
             </View>
-            <View style={styles.navCardBody}>
-              <Text style={styles.navCardTitle}>Ontem e Hoje</Text>
-              <Text style={styles.navCardDesc}>Compare a evolução histórica dos principais pontos.</Text>
+            <View style={styles.featuredBody}>
+              <View style={styles.featuredTagRow}>
+                <Text style={styles.featuredTag}>ICONOGRAFIA URBANA</Text>
+              </View>
+              <Text style={styles.featuredTitle}>Ontem e Hoje: Evolução Urbana</Text>
+              <Text style={styles.featuredDesc}>
+                Comparativo documental dos 5 marcos arquitetônicos fundamentais de Guarapuava em alta definição.
+              </Text>
             </View>
-            <View style={styles.navArrowCircle}>
-              <Text style={styles.navArrow}>→</Text>
-            </View>
+            <Feather name="arrow-right" size={20} color={colors.gold} />
           </TouchableOpacity>
 
-          {/* 3. CARD CURIOSIDADES */}
-          <TouchableOpacity 
-            style={styles.navCard} 
-            activeOpacity={0.8}
-            onPress={() => handleNavigate("/curiosidades")}
-          >
-            <View style={styles.navIconContainer}>
-              <Text style={styles.navIcon}>💡</Text>
-            </View>
-            <View style={styles.navCardBody}>
-              <Text style={styles.navCardTitle}>Você Sabia?</Text>
-              <Text style={styles.navCardDesc}>10 fatos fascinantes sobre a Menina Radiante.</Text>
-            </View>
-            <View style={styles.navArrowCircle}>
-              <Text style={styles.navArrow}>→</Text>
-            </View>
-          </TouchableOpacity>
+          {/* GRADE ASSIMÉTRICA EM DUPLA */}
+          <View style={styles.dualGrid}>
+            {/* LENDAS & CONTOS */}
+            <TouchableOpacity
+              style={styles.gridCard}
+              activeOpacity={0.85}
+              onPress={() => handleNavigate("/lendas")}
+            >
+              <View style={styles.gridCardHeader}>
+                <View style={styles.smallIconBox}>
+                  <Feather name="mic" size={18} color={colors.gold} />
+                </View>
+                <Text style={styles.gridBadge}>ÁUDIO NEURAL</Text>
+              </View>
+              <Text style={styles.gridCardTitle}>Mitos e Tradições</Text>
+              <Text style={styles.gridCardDesc}>
+                Belmiro de Miranda, Lagoa das Lágrimas e lendas narradas em estúdio.
+              </Text>
+            </TouchableOpacity>
 
-          {/* 4. CARD LENDAS */}
-          <TouchableOpacity 
-            style={styles.navCard} 
-            activeOpacity={0.8}
-            onPress={() => handleNavigate("/lendas")}
-          >
-            <View style={styles.navIconContainer}>
-              <Text style={styles.navIcon}>🐉</Text>
-            </View>
-            <View style={styles.navCardBody}>
-              <Text style={styles.navCardTitle}>Mitos e Lendas</Text>
-              <Text style={styles.navCardDesc}>Contos misteriosos e o imaginário popular.</Text>
-            </View>
-            <View style={styles.navArrowCircle}>
-              <Text style={styles.navArrow}>→</Text>
-            </View>
-          </TouchableOpacity>
-        </MotiView>
+            {/* CURIOSIDADES */}
+            <TouchableOpacity
+              style={styles.gridCard}
+              activeOpacity={0.85}
+              onPress={() => handleNavigate("/curiosidades")}
+            >
+              <View style={styles.gridCardHeader}>
+                <View style={styles.smallIconBox}>
+                  <Feather name="compass" size={18} color={colors.gold} />
+                </View>
+                <Text style={styles.gridBadge}>12 FATOS</Text>
+              </View>
+              <Text style={styles.gridCardTitle}>Você Sabia?</Text>
+              <Text style={styles.gridCardDesc}>
+                Origens da cidade, altitude, símbolos botânicos e fatos singulares.
+              </Text>
+            </TouchableOpacity>
+          </View>
 
-        {/* FOOTER */}
-        <View style={styles.footerContainer}>
-          <Text style={styles.footerText}>Guará-App • Orgulho de pertencer à nossa terra</Text>
+          {/* RODAPÉ INSTITUCIONAL */}
+          <View style={styles.footerContainer}>
+            <Text style={styles.footerText}>
+              Instituto Histórico de Guarapuava • Preservação Digital
+            </Text>
+          </View>
+
         </View>
       </ScrollView>
     </View>
@@ -184,214 +184,254 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   scrollContent: {
-    padding: 20,
-    paddingTop: 10,
-    paddingBottom: 40,
+    paddingHorizontal: colors.spacing.md,
+    paddingTop: colors.spacing.sm,
+    paddingBottom: colors.spacing.xl,
+  },
+  responsiveWrapper: {
+    width: "100%",
+    maxWidth: colors.layout.maxWidth,
+    alignSelf: "center",
   },
   settingsButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
+    width: 40,
+    height: 40,
+    borderRadius: colors.radius,
     backgroundColor: colors.card,
     borderWidth: 1,
     borderColor: colors.cardBorderSubtle,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: colors.spacing.sm,
   },
+
+  /* HERO */
   heroCard: {
-    backgroundColor: colors.cardGlass,
-    borderRadius: 24,
-    padding: 22,
+    backgroundColor: colors.card,
+    borderRadius: colors.radius,
+    padding: colors.spacing.lg,
     borderWidth: 1,
     borderColor: colors.cardBorder,
-    shadowColor: colors.gold,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.12,
-    shadowRadius: 14,
-    marginBottom: 26,
+    marginBottom: colors.spacing.lg,
+    ...Platform.select({
+      web: {
+        boxShadow: "0 4px 16px rgba(0,0,0,0.25)",
+      },
+      default: {
+        elevation: 2,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 6,
+      },
+    }),
   },
   badge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
     backgroundColor: colors.goldLight,
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 20,
+    paddingHorizontal: colors.spacing.sm + 2,
+    paddingVertical: colors.spacing.xs,
+    borderRadius: colors.radiusSm,
     borderWidth: 1,
     borderColor: colors.cardBorder,
-    marginBottom: 14,
+    marginBottom: colors.spacing.sm,
   },
   badgeDot: {
     width: 6,
     height: 6,
     borderRadius: 3,
     backgroundColor: colors.gold,
-    marginRight: 8,
+    marginRight: 6,
   },
   badgeText: {
     color: colors.goldBright,
-    fontSize: 10,
-    fontWeight: '800',
+    fontSize: 11,
+    fontWeight: "700",
     letterSpacing: 1.2,
   },
   heroTitle: {
-    fontSize: 34,
-    fontWeight: '900',
+    fontSize: 32,
+    fontWeight: "800",
     color: colors.text,
     letterSpacing: -0.5,
+    marginBottom: 2,
   },
-  heroSubtitleTag: {
+  heroSubtitle: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: "600",
     color: colors.gold,
-    marginTop: 2,
-    marginBottom: 10,
+    marginBottom: colors.spacing.sm,
   },
   heroDescription: {
-    fontSize: 14,
+    fontSize: 15.5,
     color: colors.textMuted,
-    lineHeight: 21,
-    marginBottom: 20,
+    lineHeight: 23,
+    maxWidth: 580,
+    marginBottom: colors.spacing.md,
   },
-  actionGroup: {
-    gap: 10,
-  },
+
+  /* BOTÕES DO HERO */
   primaryActionButton: {
     backgroundColor: colors.gold,
-    paddingVertical: 15,
-    borderRadius: 14,
-    alignItems: 'center',
-    shadowColor: colors.gold,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.35,
-    shadowRadius: 8,
-    elevation: 4,
+    minHeight: 48,
+    borderRadius: colors.radius,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: colors.spacing.md,
+    marginBottom: colors.spacing.sm,
   },
   primaryActionText: {
     color: colors.textDark,
-    fontWeight: '900',
+    fontWeight: "800",
     fontSize: 14,
-    letterSpacing: 1,
+    letterSpacing: 0.8,
   },
-  secondaryActionRow: {
-    flexDirection: 'row',
-    gap: 10,
+  heroSecondaryActions: {
+    flexDirection: "row",
+    gap: colors.spacing.sm,
   },
-  secondaryActionButton: {
+  heroOutlineButton: {
     flex: 1,
-    backgroundColor: 'rgba(245, 158, 11, 0.1)',
-    paddingVertical: 13,
-    borderRadius: 12,
-    alignItems: 'center',
+    minHeight: 44,
+    borderRadius: colors.radius,
     borderWidth: 1,
     borderColor: colors.cardBorder,
+    backgroundColor: "rgba(197, 160, 89, 0.05)",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: colors.spacing.sm,
   },
-  secondaryActionText: {
+  heroOutlineText: {
     color: colors.goldBright,
-    fontWeight: '800',
-    fontSize: 13,
-    letterSpacing: 0.5,
+    fontWeight: "600",
+    fontSize: 14,
   },
-  tertiaryActionButton: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    paddingVertical: 13,
-    borderRadius: 12,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.cardBorderSubtle,
-  },
-  tertiaryActionText: {
-    color: colors.text,
-    fontWeight: '700',
-    fontSize: 13,
-    letterSpacing: 0.5,
-  },
-  exploreSection: {
-    marginTop: 4,
-  },
-  sectionHeaderRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-    gap: 12,
+
+  /* SEÇÃO EXPLORAR */
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: colors.spacing.sm,
+    marginBottom: colors.spacing.md,
+    marginTop: colors.spacing.xs,
   },
   sectionTitle: {
     color: colors.textSubtle,
-    fontSize: 11,
-    fontWeight: '800',
+    fontSize: 12,
+    fontWeight: "700",
     letterSpacing: 1.5,
   },
-  sectionLine: {
+  sectionDivider: {
     flex: 1,
     height: 1,
     backgroundColor: colors.cardBorderSubtle,
   },
-  navCard: {
-    backgroundColor: colors.cardGlass,
-    borderRadius: 18,
-    padding: 16,
-    marginBottom: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
+
+  /* BLOCO LARGO DESTACADO */
+  featuredCard: {
+    backgroundColor: colors.card,
+    borderRadius: colors.radius,
     borderWidth: 1,
     borderColor: colors.cardBorderSubtle,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
+    padding: colors.spacing.md,
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: colors.spacing.md,
+    gap: colors.spacing.md,
   },
-  navIconContainer: {
+  featuredIconBox: {
     width: 46,
     height: 46,
-    borderRadius: 14,
-    backgroundColor: 'rgba(245, 158, 11, 0.09)',
+    borderRadius: colors.radius,
+    backgroundColor: colors.goldLight,
     borderWidth: 1,
-    borderColor: 'rgba(245, 158, 11, 0.18)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 14,
+    borderColor: colors.cardBorder,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  navIcon: {
-    fontSize: 20,
-  },
-  navCardBody: {
+  featuredBody: {
     flex: 1,
   },
-  navCardTitle: {
-    fontSize: 15,
-    fontWeight: '800',
-    color: colors.text,
-    marginBottom: 2,
+  featuredTagRow: {
+    marginBottom: 3,
   },
-  navCardDesc: {
-    fontSize: 12,
-    color: colors.textMuted,
-    lineHeight: 16,
-  },
-  navArrowCircle: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: 'rgba(255, 255, 255, 0.04)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10,
-  },
-  navArrow: {
+  featuredTag: {
+    fontSize: 11,
+    fontWeight: "700",
     color: colors.gold,
-    fontSize: 14,
-    fontWeight: 'bold',
+    letterSpacing: 1,
   },
+  featuredTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: colors.text,
+    marginBottom: 4,
+  },
+  featuredDesc: {
+    fontSize: 14,
+    color: colors.textMuted,
+    lineHeight: 20,
+  },
+
+  /* GRADE DUPLA ASSIMÉTRICA */
+  dualGrid: {
+    flexDirection: "row",
+    gap: colors.spacing.md,
+    marginBottom: colors.spacing.lg,
+  },
+  gridCard: {
+    flex: 1,
+    backgroundColor: colors.card,
+    borderRadius: colors.radius,
+    borderWidth: 1,
+    borderColor: colors.cardBorderSubtle,
+    padding: colors.spacing.md,
+    justifyContent: "space-between",
+  },
+  gridCardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: colors.spacing.sm,
+  },
+  smallIconBox: {
+    width: 34,
+    height: 34,
+    borderRadius: colors.radiusSm,
+    backgroundColor: colors.goldLight,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gridBadge: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: colors.goldBright,
+    letterSpacing: 0.8,
+  },
+  gridCardTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: colors.text,
+    marginBottom: 4,
+  },
+  gridCardDesc: {
+    fontSize: 13.5,
+    color: colors.textMuted,
+    lineHeight: 19,
+  },
+
+  /* FOOTER */
   footerContainer: {
-    marginTop: 20,
-    alignItems: 'center',
+    alignItems: "center",
+    paddingTop: colors.spacing.sm,
   },
   footerText: {
+    fontSize: 12,
     color: colors.textSubtle,
-    fontSize: 11,
-    fontStyle: 'italic',
+    textAlign: "center",
   },
 });

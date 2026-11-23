@@ -1,13 +1,21 @@
 import * as Haptics from "expo-haptics";
+import { Feather } from "@expo/vector-icons";
 import { Stack } from "expo-router";
-import { MotiView } from "moti";
 import React from "react";
-import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Linking,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { colors } from "@/constants/colors";
 
 export default function Config() {
-  const version = "1.2.0"; 
-  const devName = "Leonardo Hirt Moraes"; 
+  const version = "1.2.0";
+  const devName = "Leonardo Hirt Moraes";
 
   const abrirLink = (url: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -15,156 +23,172 @@ export default function Config() {
   };
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-      <Stack.Screen 
-        options={{ 
-          title: "Sobre o Aplicativo", 
-          headerStyle: { backgroundColor: colors.background }, 
-          headerTintColor: colors.text 
-        }} 
+    <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: "Sobre o Aplicativo",
+          headerStyle: { backgroundColor: colors.background },
+          headerTintColor: colors.text,
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: "700",
+          },
+        }}
       />
 
-      {/* HERO / APP IDENTITY */}
-      <MotiView 
-        from={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: "spring", duration: 700 }}
-        style={styles.heroCard}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
       >
-        <View style={styles.logoContainer}>
-          <Image 
-            source={require("../assets/images/icon.png")} 
-            style={styles.logo}
-          />
+        <View style={styles.responsiveWrapper}>
+          
+          {/* HEADER / IDENTIDADE DO APP */}
+          <View style={styles.heroCard}>
+            <View style={styles.logoContainer}>
+              <Image
+                source={require("../assets/images/icon.png")}
+                style={styles.logo}
+              />
+            </View>
+            <Text style={styles.appName}>Guará-App</Text>
+            <View style={styles.versionBadge}>
+              <Text style={styles.versionBadgeText}>VERSÃO {version} • PRODUÇÃO</Text>
+            </View>
+            <Text style={styles.appSubtitle}>
+              Plataforma de preservação e difusão do hino municipal, historiografia
+              oficial, tradições orais e patrimônio de Guarapuava — PR.
+            </Text>
+          </View>
+
+          {/* DESENVOLVEDOR */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>AUTORIA E DESENVOLVIMENTO</Text>
+            <View style={styles.card}>
+              <View style={styles.devRow}>
+                <View style={styles.avatarBadge}>
+                  <Feather name="code" size={18} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.devLabel}>Proponente & Desenvolvedor:</Text>
+                  <Text style={styles.devName}>{devName}</Text>
+                  <Text style={styles.devAcademic}>
+                    Graduando em Sistemas para Internet • UTFPR Campus Guarapuava
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.linksContainer}>
+                <TouchableOpacity
+                  style={styles.outlineButton}
+                  activeOpacity={0.8}
+                  onPress={() => abrirLink("https://github.com/leonardohirt")}
+                >
+                  <Feather name="github" size={16} color={colors.text} style={{ marginRight: 8 }} />
+                  <Text style={styles.buttonText}>Perfil no GitHub</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.outlineButton}
+                  activeOpacity={0.8}
+                  onPress={() =>
+                    abrirLink("https://github.com/leonardohirt/APP-Guarapuava")
+                  }
+                >
+                  <Feather name="terminal" size={16} color={colors.text} style={{ marginRight: 8 }} />
+                  <Text style={styles.buttonText}>Repositório do Código</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
+          {/* CRÉDITOS HISTÓRICOS */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>CRÉDITOS HISTÓRICOS E ACERVO</Text>
+            <View style={styles.card}>
+              <View style={styles.creditItem}>
+                <View style={styles.creditIconBox}>
+                  <Feather name="feather" size={16} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.creditLabel}>Letra do Hino Municipal</Text>
+                  <Text style={styles.creditValue}>Gilda Boscardim Todeschini</Text>
+                </View>
+              </View>
+
+              <View style={styles.creditDivider} />
+
+              <View style={styles.creditItem}>
+                <View style={styles.creditIconBox}>
+                  <Feather name="music" size={16} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.creditLabel}>Música do Hino Municipal</Text>
+                  <Text style={styles.creditValue}>Luiz Eulógio Zilli</Text>
+                </View>
+              </View>
+
+              <View style={styles.creditDivider} />
+
+              <View style={styles.creditItem}>
+                <View style={styles.creditIconBox}>
+                  <Feather name="archive" size={16} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.creditLabel}>Acervo e Partitura Histórica</Text>
+                  <Text style={styles.creditValue}>
+                    Museu Municipal Visconde de Guarapuava
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.creditDivider} />
+
+              <View style={styles.creditItem}>
+                <View style={styles.creditIconBox}>
+                  <Feather name="book" size={16} color={colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.creditLabel}>Pesquisa & Biografias</Text>
+                  <Text style={styles.creditValue}>
+                    ALAC (Academia de Letras, Artes e Ciências de Guarapuava)
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          {/* CARACTERÍSTICAS TÉCNICAS */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>ARQUITETURA DE ENGENHARIA</Text>
+            <View style={styles.card}>
+              <View style={styles.featureRow}>
+                <Feather name="check" size={16} color={colors.gold} style={{ marginRight: 10 }} />
+                <Text style={styles.featureText}>100% Autônomo e Funcional Offline</Text>
+              </View>
+              <View style={styles.featureRow}>
+                <Feather name="check" size={16} color={colors.gold} style={{ marginRight: 10 }} />
+                <Text style={styles.featureText}>Áudios neurais de estúdio integrados</Text>
+              </View>
+              <View style={styles.featureRow}>
+                <Feather name="check" size={16} color={colors.gold} style={{ marginRight: 10 }} />
+                <Text style={styles.featureText}>Respostas táteis nativas (Haptic Feedback)</Text>
+              </View>
+              <View style={styles.featureRow}>
+                <Feather name="check" size={16} color={colors.gold} style={{ marginRight: 10 }} />
+                <Text style={styles.featureText}>Armazenamento e recordes locais seguros</Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.footerContainer}>
+            <Text style={styles.footerText}>
+              Guará-App • Guarapuava - Paraná • 2026
+            </Text>
+          </View>
+
         </View>
-        <Text style={styles.appName}>Guará-App</Text>
-        <View style={styles.versionBadge}>
-          <Text style={styles.versionBadgeText}>VERSÃO {version} • PRODUÇÃO</Text>
-        </View>
-        <Text style={styles.appSubtitle}>
-          Plataforma de preservação e difusão do hino, história oficial, lendas e patrimônio de Guarapuava - PR.
-        </Text>
-      </MotiView>
-
-      {/* SEÇÃO DESENVOLVEDOR */}
-      <MotiView 
-        from={{ opacity: 0, translateY: 15 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ delay: 150, duration: 500 }}
-        style={styles.section}
-      >
-        <Text style={styles.sectionTitle}>DESENVOLVIMENTO</Text>
-        <View style={styles.card}>
-          <View style={styles.devRow}>
-            <View style={styles.avatarBadge}>
-              <Text style={{ fontSize: 22 }}>🌲</Text>
-            </View>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.devLabel}>Criado e desenvolvido por:</Text>
-              <Text style={styles.devName}>{devName}</Text>
-            </View>
-          </View>
-
-          <View style={styles.linksContainer}>
-            <TouchableOpacity 
-              style={styles.primaryButton} 
-              activeOpacity={0.85}
-              onPress={() => abrirLink('https://github.com/leonardohirt')}
-            >
-              <Text style={styles.primaryButtonText}>🌐 Perfil no GitHub</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.secondaryButton} 
-              activeOpacity={0.85}
-              onPress={() => abrirLink('https://github.com/leonardohirt/APP-Guarapuava')}
-            >
-              <Text style={styles.secondaryButtonText}>📦 Repositório do Projeto</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </MotiView>
-
-      {/* SEÇÃO AUTORIA DO HINO E CRÉDITOS */}
-      <MotiView 
-        from={{ opacity: 0, translateY: 15 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ delay: 250, duration: 500 }}
-        style={styles.section}
-      >
-        <Text style={styles.sectionTitle}>CRÉDITOS HISTÓRICOS & AUTORIA</Text>
-        <View style={styles.card}>
-          <View style={styles.creditItem}>
-            <Text style={styles.creditIcon}>✍️</Text>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.creditLabel}>Letra do Hino Municipal</Text>
-              <Text style={styles.creditValue}>Gilda Boscardim Todeschini</Text>
-            </View>
-          </View>
-
-          <View style={styles.creditDivider} />
-
-          <View style={styles.creditItem}>
-            <Text style={styles.creditIcon}>🎼</Text>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.creditLabel}>Música do Hino Municipal</Text>
-              <Text style={styles.creditValue}>Luiz Eulógio Zilli</Text>
-            </View>
-          </View>
-
-          <View style={styles.creditDivider} />
-
-          <View style={styles.creditItem}>
-            <Text style={styles.creditIcon}>🏛️</Text>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.creditLabel}>Acervo e Partitura Histórica</Text>
-              <Text style={styles.creditValue}>Museu Municipal Visconde de Guarapuava</Text>
-            </View>
-          </View>
-
-          <View style={styles.creditDivider} />
-
-          <View style={styles.creditItem}>
-            <Text style={styles.creditIcon}>📖</Text>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.creditLabel}>Pesquisa & Biografias Históricas</Text>
-              <Text style={styles.creditValue}>ALAC (Academia de Letras, Artes e Ciências)</Text>
-            </View>
-          </View>
-        </View>
-      </MotiView>
-
-      {/* SEÇÃO CARACTERÍSTICAS TÉCNICAS */}
-      <MotiView 
-        from={{ opacity: 0, translateY: 15 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ delay: 350, duration: 500 }}
-        style={styles.section}
-      >
-        <Text style={styles.sectionTitle}>ESPECIFICAÇÕES DO SISTEMA</Text>
-        <View style={styles.card}>
-          <View style={styles.featureRow}>
-            <Text style={styles.featureBullet}>⚡</Text>
-            <Text style={styles.featureText}>100% Autônomo e Funcional Offline</Text>
-          </View>
-          <View style={styles.featureRow}>
-            <Text style={styles.featureBullet}>🔊</Text>
-            <Text style={styles.featureText}>Síntese de Voz Nativa em Português (Expo Speech)</Text>
-          </View>
-          <View style={styles.featureRow}>
-            <Text style={styles.featureBullet}>📳</Text>
-            <Text style={styles.featureText}>Respostas Táteis com Haptic Feedback</Text>
-          </View>
-          <View style={styles.featureRow}>
-            <Text style={styles.featureBullet}>💾</Text>
-            <Text style={styles.featureText}>Salvamento de Recorde Local (AsyncStorage)</Text>
-          </View>
-        </View>
-      </MotiView>
-
-      <Text style={styles.footer}>Guará-App • Guarapuava - Paraná • 2026</Text>
-      <View style={{ height: 30 }} />
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -174,189 +198,182 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   scrollContent: {
-    padding: 18,
+    paddingHorizontal: colors.spacing.md,
+    paddingTop: colors.spacing.md,
+    paddingBottom: colors.spacing.xl,
+  },
+  responsiveWrapper: {
+    width: "100%",
+    maxWidth: colors.layout.maxWidth,
+    alignSelf: "center",
   },
   heroCard: {
-    backgroundColor: colors.cardGlass,
-    borderRadius: 24,
-    padding: 24,
-    alignItems: 'center',
+    backgroundColor: colors.card,
+    borderRadius: colors.radius,
+    padding: colors.spacing.lg,
+    alignItems: "center",
     borderWidth: 1,
-    borderColor: colors.cardBorder,
-    shadowColor: colors.gold,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    marginBottom: 22,
+    borderColor: colors.cardBorderSubtle,
+    marginBottom: colors.spacing.lg,
   },
   logoContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    width: 72,
+    height: 72,
+    borderRadius: colors.radius,
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
     borderWidth: 1,
-    borderColor: colors.cardBorder,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 14,
-    shadowColor: colors.gold,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
+    borderColor: colors.cardBorderSubtle,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: colors.spacing.sm,
   },
   logo: {
-    width: 68,
-    height: 68,
-    borderRadius: 16,
+    width: 60,
+    height: 60,
+    borderRadius: colors.radiusSm,
   },
   appName: {
-    fontSize: 26,
-    fontWeight: '900',
+    fontSize: 24,
+    fontWeight: "800",
     color: colors.text,
-    letterSpacing: -0.5,
+    letterSpacing: -0.3,
   },
   versionBadge: {
     backgroundColor: colors.goldLight,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.cardBorder,
-    marginTop: 6,
-    marginBottom: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: colors.radiusSm,
+    marginTop: 4,
+    marginBottom: colors.spacing.sm,
   },
   versionBadgeText: {
     color: colors.goldBright,
-    fontSize: 10,
-    fontWeight: '900',
+    fontSize: 10.5,
+    fontWeight: "700",
     letterSpacing: 1,
   },
   appSubtitle: {
-    fontSize: 13,
+    fontSize: 14.5,
     color: colors.textMuted,
-    textAlign: 'center',
-    lineHeight: 19,
+    textAlign: "center",
+    lineHeight: 22,
+    maxWidth: 520,
   },
+
   section: {
-    marginBottom: 18,
+    marginBottom: colors.spacing.lg,
   },
   sectionTitle: {
     fontSize: 11,
-    fontWeight: '800',
+    fontWeight: "700",
     color: colors.gold,
     letterSpacing: 1.5,
-    marginBottom: 10,
-    paddingHorizontal: 4,
+    marginBottom: colors.spacing.sm,
   },
   card: {
-    backgroundColor: colors.cardGlass,
-    borderRadius: 18,
-    padding: 18,
+    backgroundColor: colors.card,
+    borderRadius: colors.radius,
     borderWidth: 1,
     borderColor: colors.cardBorderSubtle,
+    padding: colors.spacing.md,
   },
   devRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-    gap: 12,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: colors.spacing.md,
+    gap: colors.spacing.md,
   },
   avatarBadge: {
-    width: 44,
-    height: 44,
-    borderRadius: 12,
+    width: 38,
+    height: 38,
+    borderRadius: colors.radiusSm,
     backgroundColor: colors.goldLight,
-    borderWidth: 1,
-    borderColor: colors.cardBorder,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   devLabel: {
-    fontSize: 11,
+    fontSize: 12,
     color: colors.textSubtle,
-    fontWeight: '600',
+    marginBottom: 2,
   },
   devName: {
     fontSize: 16,
-    fontWeight: '900',
+    fontWeight: "700",
     color: colors.text,
-    marginTop: 2,
+    marginBottom: 2,
+  },
+  devAcademic: {
+    fontSize: 13,
+    color: colors.textMuted,
+    lineHeight: 18,
   },
   linksContainer: {
-    gap: 10,
+    gap: colors.spacing.sm,
   },
-  primaryButton: {
-    backgroundColor: colors.gold,
-    paddingVertical: 13,
-    borderRadius: 12,
-    alignItems: 'center',
-    shadowColor: colors.gold,
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-  },
-  primaryButtonText: {
-    color: colors.textDark,
-    fontWeight: '900',
-    fontSize: 13,
-    letterSpacing: 0.5,
-  },
-  secondaryButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    paddingVertical: 13,
-    borderRadius: 12,
-    alignItems: 'center',
+  outlineButton: {
+    backgroundColor: "transparent",
     borderWidth: 1,
     borderColor: colors.cardBorderSubtle,
+    minHeight: 44,
+    borderRadius: colors.radius,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: colors.spacing.md,
   },
-  secondaryButtonText: {
+  buttonText: {
     color: colors.text,
-    fontWeight: '700',
-    fontSize: 13,
+    fontSize: 13.5,
+    fontWeight: "600",
   },
+
+  /* CRÉDITOS */
   creditItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingVertical: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: colors.spacing.md,
   },
-  creditIcon: {
-    fontSize: 20,
+  creditIconBox: {
+    width: 32,
+    height: 32,
+    borderRadius: colors.radiusSm,
+    backgroundColor: colors.goldLight,
+    justifyContent: "center",
+    alignItems: "center",
   },
   creditLabel: {
-    fontSize: 11,
+    fontSize: 12,
     color: colors.textSubtle,
   },
   creditValue: {
-    fontSize: 14,
-    fontWeight: '800',
-    color: colors.goldChampagne,
-    marginTop: 2,
+    fontSize: 14.5,
+    fontWeight: "600",
+    color: colors.text,
   },
   creditDivider: {
     height: 1,
     backgroundColor: colors.cardBorderSubtle,
-    marginVertical: 10,
+    marginVertical: colors.spacing.sm,
   },
+
+  /* ESPECIFICAÇÕES */
   featureRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 6,
   },
-  featureBullet: {
-    fontSize: 16,
-  },
   featureText: {
-    fontSize: 13,
+    fontSize: 14,
     color: colors.textMuted,
-    fontWeight: '600',
   },
-  footer: {
-    textAlign: 'center',
+
+  footerContainer: {
+    paddingTop: colors.spacing.md,
+    alignItems: "center",
+  },
+  footerText: {
+    fontSize: 12,
     color: colors.textSubtle,
-    fontSize: 11,
-    marginTop: 10,
-    fontStyle: 'italic',
+    textAlign: "center",
   },
 });
